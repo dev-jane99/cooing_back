@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cooing.com.site.mapper.ApplicationMapper">
+
+    <!-- 신청서 등록 -->
+    <insert id="insert" parameterType="cooing.com.site.domain.ApplicationVO">
+        INSERT INTO application (announcement_id, applicant_name, mobile, total_applicants, preferred_date, preferred_time, note, status, payment_method, is_paid, payment_transaction_id, application_date)
+        VALUES (#{announcementId}, #{applicantName}, #{mobile}, #{totalApplicants}, #{preferredDate}, #{preferredTime}, #{note}, #{status}, #{paymentMethod}, #{isPaid}, #{paymentTransactionId}, #{applicationDate});
+    </insert>
+
+    <!-- 신청서 단건 조회 -->
+    <select id="findById" parameterType="Long" resultType="cooing.com.site.domain.ApplicationVO">
+        SELECT * FROM application WHERE id = #{id};
+    </select>
+
+    <!-- 신청서 전체 조회 -->
+    <select id="findAll" resultType="cooing.com.site.domain.ApplicationVO">
+        SELECT * FROM application;
+    </select>
+
+    <!-- 특정 발표에 대한 신청서 조회 -->
+    <select id="findByAnnouncementId" parameterType="Long" resultType="cooing.com.site.domain.ApplicationVO">
+        SELECT * FROM application WHERE announcement_id = #{announcementId};
+    </select>
+
+    <!-- 신청서 상태 업데이트 -->
+    <update id="update" parameterType="cooing.com.site.domain.ApplicationVO">
+        UPDATE application
+        SET applicant_name = #{applicantName},
+            mobile = #{mobile},
+            total_applicants = #{totalApplicants},
+            preferred_date = #{preferredDate},
+            preferred_time = #{preferredTime},
+            note = #{note},
+            status = #{status},
+            payment_method = #{paymentMethod},
+            is_paid = #{isPaid},
+            payment_transaction_id = #{paymentTransactionId},
+            application_date = #{applicationDate}
+        WHERE id = #{id};
+    </update>
+
+    <!-- 신청서 삭제 -->
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM application WHERE id = #{id};
+    </delete>
+
+    <!-- 여러 신청서 삭제 -->
+    <delete id="deleteByIds" parameterType="List">
+        DELETE FROM application WHERE id IN
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 예약된 시간대 확인 (특정 날짜와 시간대가 예약됐는지 확인) -->
+    <select id="isTimeSlotReserved" parameterType="map" resultType="int">
+        SELECT COUNT(*) 
+        FROM application 
+        WHERE announcement_id = #{announcementId} 
+        AND preferred_date = #{preferredDate} 
+        AND preferred_time = #{preferredTime};
+    </select>
+
+</mapper>
