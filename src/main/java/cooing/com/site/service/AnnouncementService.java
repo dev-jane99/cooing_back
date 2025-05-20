@@ -9,7 +9,7 @@ public interface AnnouncementService {
 
     public List<AnnouncementVO> getAllAnnouncements();
 
-    public AnnouncementVO getAnnouncementById(Long id); // ✅ 수정된 부분
+    public AnnouncementVO getAnnouncementById(Long id);
 
     public void updateAnnouncement(AnnouncementVO announcementVO);
 
