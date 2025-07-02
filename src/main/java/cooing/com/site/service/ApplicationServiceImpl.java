@@ -1,5 +1,6 @@
 package cooing.com.site.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public boolean isTimeSlotReserved(Long announcementId, String preferredDate, String preferredTime) {
+    public boolean isTimeSlotReserved(Long announcementId, LocalDate preferredDate, String preferredTime) {
         return applicationDAO.isTimeSlotReserved(announcementId, preferredDate, preferredTime);
     }
 

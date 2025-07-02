@@ -54,7 +54,7 @@
     </delete>
 
     <!-- 예약된 시간대 확인 (특정 날짜와 시간대가 예약됐는지 확인) -->
-    <select id="isTimeSlotReserved" parameterType="map" resultType="int">
+    <select id="isTimeSlotReserved" resultType="int">
         SELECT COUNT(*) 
         FROM application 
         WHERE announcement_id = #{announcementId} 

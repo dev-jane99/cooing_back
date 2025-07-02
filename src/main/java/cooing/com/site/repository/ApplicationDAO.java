@@ -1,5 +1,6 @@
 package cooing.com.site.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,8 @@ public class ApplicationDAO {
         return Optional.ofNullable(applicationMapper.findById(id));
     }
 
-    public boolean isTimeSlotReserved(Long announcementId, String preferredDate, String preferredTime) {
-        int count = applicationMapper.countByAnnouncementDateTime(announcementId, preferredDate, preferredTime);
+    public boolean isTimeSlotReserved(Long announcementId, LocalDate preferredDate, String preferredTime) {
+        int count = applicationMapper.isTimeSlotReserved(announcementId, preferredDate, preferredTime);
         return count > 0;
     }
 

@@ -1,5 +1,6 @@
 package cooing.com.site.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,9 +18,12 @@ public interface ApplicationMapper {
     ApplicationVO findById(Long id);
 
     // 특정 날짜/시간에 이미 예약이 있는지 확인
-    int countByAnnouncementDateTime(@Param("announcementId") Long announcementId, 
-                                    @Param("preferredDate") String preferredDate, 
-                                    @Param("preferredTime") String preferredTime);
+    int isTimeSlotReserved(
+        @Param("announcementId") Long announcementId,
+        @Param("preferredDate") LocalDate preferredDate,
+        @Param("preferredTime") String preferredTime
+    );
+    
 
     // 신청서 등록
     void insert(ApplicationVO application);

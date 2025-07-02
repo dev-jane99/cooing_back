@@ -1,5 +1,6 @@
 package cooing.com.site.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ public interface ApplicationService {
 
     Optional<ApplicationVO> getApplicationById(Long id);
 
-    boolean isTimeSlotReserved(Long announcementId, String preferredDate, String preferredTime);
+    boolean isTimeSlotReserved(Long announcementId, LocalDate preferredDate, String preferredTime);
 
     void createApplication(ApplicationVO application);
 

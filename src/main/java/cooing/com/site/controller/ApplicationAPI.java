@@ -74,9 +74,9 @@ public class ApplicationAPI {
     public List<Map<String, String>> getReservedSlots(@RequestParam Long announcementId) {
         return applicationService.findByAnnouncementId(announcementId).stream()
                 .map(app -> Map.of(
-                    "date", app.getPreferredDate(),
+                    "date", app.getPreferredDate() != null ? app.getPreferredDate().toString() : "",
                     "time", app.getPreferredTime()
                 ))
                 .collect(Collectors.toList());
-    }
+    }    
 }
